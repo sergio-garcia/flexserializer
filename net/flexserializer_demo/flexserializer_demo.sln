@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flexserializer_demo", "flexserializer_demo\flexserializer_demo.csproj", "{D618FD41-BC0A-4B79-AEF2-00F76915A52B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D618FD41-BC0A-4B79-AEF2-00F76915A52B}.Debug|x86.ActiveCfg = Debug|x86
+		{D618FD41-BC0A-4B79-AEF2-00F76915A52B}.Debug|x86.Build.0 = Debug|x86
+		{D618FD41-BC0A-4B79-AEF2-00F76915A52B}.Release|x86.ActiveCfg = Release|x86
+		{D618FD41-BC0A-4B79-AEF2-00F76915A52B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

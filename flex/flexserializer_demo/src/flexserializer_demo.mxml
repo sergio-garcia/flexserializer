@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" minWidth="955" minHeight="600" xmlns:flexserializer_demo="br.com.ginx.flexserializer_demo.*" width="569">
+
+	<fx:Script>
+		<![CDATA[
+			import br.com.ginx.flexserializer.DataContractSerializer;
+			import br.com.ginx.flexserializer_demo.objects.Customer;
+			import br.com.ginx.flexserializer_demo.objects.Invoice;
+			import br.com.ginx.flexserializer_demo.objects.PreferredCustomer;
+			import br.com.ginx.flexserializer_demo.objects.Product;
+			
+			import mx.controls.Alert;
+			
+			protected function serializeCustomer_clickHandler(event:MouseEvent):void
+			{
+				var customer:Customer= new Customer();
+				customer.FirstName = "Sergio";
+				customer.LastName  = "Garcia";
+				customer.BirthDate = new Date(1984, 8, 13); // 1984-09-13
+				
+				var serializer:DataContractSerializer = new DataContractSerializer(Customer);
+				serializer.addNamespace("br.com.ginx.flexserializer_demo.objects", "http://blog.ginx.com.br/");
+				
+				objectData.text = serializer.serialize(customer)
+			}
+
+			protected function deserializeCustomer_clickHandler(event:MouseEvent):void
+			{
+				var serializer:DataContractSerializer = new DataContractSerializer(Customer);
+				serializer.addNamespace("br.com.ginx.flexserializer_demo.objects", "http://blog.ginx.com.br/");
+				
+				var customer:Customer = serializer.deserialize(objectData.text) as Customer;
+				
+				if (!customer)
+				{
+					Alert.show("Object couldn't be deserialized.\nCheck you input data.");
+					return;
+				}
+
+				Alert.show("== Customer:\nName: " + customer.FirstName + " " + customer.LastName + "\nBirth Date: " + customer.BirthDate.toDateString());
+			}
+
+			protected function serializePreferredCustomer_clickHandler(event:MouseEvent):void
+			{
+				var customer:PreferredCustomer= new PreferredCustomer();
+				customer.FirstName = "Sergio";
+				customer.LastName  = "Garcia";
+				customer.BirthDate = new Date(1984, 8, 13); // 1984-09-13
+				customer.Seller = "Jack";
+					
+				var serializer:DataContractSerializer = new DataContractSerializer(Customer);
+				serializer.addNamespace("br.com.ginx.flexserializer_demo.objects", "http://blog.ginx.com.br/");
+				
+				objectData.text = serializer.serialize(customer)
+			}
+
+			protected function deserializePreferredCustomer_clickHandler(event:MouseEvent):void
+			{
+				var serializer:DataContractSerializer = new DataContractSerializer(Customer);
+				serializer.addNamespace("br.com.ginx.flexserializer_demo.objects", "http://blog.ginx.com.br/");
+				
+				var customer:PreferredCustomer = serializer.deserialize(objectData.text) as PreferredCustomer;
+				
+				if (!customer)
+				{
+					Alert.show("Object couldn't be deserialized. \nCheck you input data.");
+					return;
+				}
+				
+				Alert.show("== Customer:\nName: " + customer.FirstName + " " + customer.LastName + "\nBirth Date: " + customer.BirthDate.toDateString() + "\nSeller: " + customer.Seller);
+			}
+
+			protected function serializeInvoice_clickHandler(event:MouseEvent):void
+			{
+				var customer:Customer= new Customer();
+				customer.FirstName = "Sergio";
+				customer.LastName  = "Garcia";
+				customer.BirthDate = new Date(1984, 8, 13); // 1984-09-13
+				
+				var product1:Product = new Product();
+				product1.Name = "Laser TV";
+				product1.Price = 99999.99;
+				
+				var product2:Product = new Product();
+				product2.Name = "Quantum Computer";
+				product2.Price = 7777.99;
+				
+				var invoice:Invoice = new Invoice();
+				invoice.Customer = customer;
+				invoice.Products = [product1, product2];
+				
+				var serializer:DataContractSerializer = new DataContractSerializer(Invoice);
+				serializer.addNamespace("br.com.ginx.flexserializer_demo.objects", "http://blog.ginx.com.br/");
+				
+				objectData.text = serializer.serialize(invoice)
+			}
+
+			protected function deserializeInvoice_clickHandler(event:MouseEvent):void
+			{
+				var serializer:DataContractSerializer = new DataContractSerializer(Invoice);
+				serializer.addNamespace("br.com.ginx.flexserializer_demo.objects", "http://blog.ginx.com.br/");
+				
+				var invoice:Invoice = serializer.deserialize(objectData.text) as Invoice;
+				
+				if (!invoice)
+				{
+					Alert.show("Object couldn't be deserialized. \nCheck you input data.");
+					return;
+				}
+				
+				var msg:String = "== Invoice Customer:\nName: " + invoice.Customer.FirstName + " " + invoice.Customer.LastName + "\nBirth Date: " + invoice.Customer.BirthDate.toDateString();
+				msg += "\n\n== Products";
+				
+				for (var index:Object in invoice.Products)
+				{
+					msg += "\n== == Product " + index;
+					msg += "\n== Name: " + invoice.Products[index].Name;
+					msg += "\n== Price: " + invoice.Products[index].Price;
+				}
+				
+				Alert.show(msg);
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:Button x="10" y="10" label="Serialize Customer" id="serializeCustomer" click="serializeCustomer_clickHandler(event)"/>
+	<mx:Button x="10" y="40" label="Serialize PreferredCustomer" id="serializePreferredCustomer" click="serializePreferredCustomer_clickHandler(event)"/>
+	<mx:Button x="10" y="70" label="Serialize Invoice" id="serializeInvoice" click="serializeInvoice_clickHandler(event)"/>
+	<mx:Button x="205" y="41" label="Deserialize PreferredCustomer" id="deserializePreferredCustomer" click="deserializePreferredCustomer_clickHandler(event)"/>
+	<mx:Button x="205" y="11" label="Deserialize Customer" id="deserializeCustomer" click="deserializeCustomer_clickHandler(event)"/>
+	<mx:Button x="205" y="70" label="Deserialize Invoice" id="deserializeInvoice" click="deserializeInvoice_clickHandler(event)"/>
+	<mx:TextArea width="550" height="151" x="10" y="100" id="objectData"/>
+</mx:Application>

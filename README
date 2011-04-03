@@ -1,4 +1,43 @@
 flexserializer - Flex .net compatible DataContract serializer library
 Author:   Sergio Garcia
+URL   :   http://blog.ginx.com.br/
 
 ==============================================================================
+
+  ABOUT:
+
+Flex Serializer allows a easilly integration between .net and Flex, allowing
+flex to read and write objects in a compatible format with Microsoft .net.
+
+The format used is the same used in the WCF communication, allowing in future
+to write a Flex compatible WCF client totally open source and free.
+
+I was motivated to write this library 'cause I don't found a simple and no so
+invasive way to integrate a .net software I was written with flex. Others
+library require paid software or which .net write object in a flex compatible
+way.
+
+In the future, I will be modificating this library to be more flexible and to
+allow it to work with more configuration of the data contracts. Maybe, I will
+be writing a Flex WCF Client, if it have feedback and people needing it.
+
+===============================================================================
+
+  KNOW ISSUES:
+
+ * All .net object must have a DataContract namespace declare, and all your
+   object must reside in the same namespace.
+   
+ * All flex object also must have the same namespace.
+ 
+===============================================================================
+
+  TODO:
+
+ * Handle objects in diferent namespaces
+ 
+ * Handle .net custom attributes better
+ 
+ * Handle flex custom metadata better
+
+  

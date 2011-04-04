@@ -19,7 +19,7 @@ way.
 
 In the future, I will be modificating this library to be more flexible and to
 allow it to work with more configuration of the data contracts. Maybe, I will
-be writing a Flex WCF Client, if it have feedback and people needing it.
+be writing a Flex WCF Client, if it have requests of people need it.
 
 ===============================================================================
 
@@ -28,7 +28,8 @@ be writing a Flex WCF Client, if it have feedback and people needing it.
  * All .net object must have a DataContract namespace declare, and all your
    object must reside in the same namespace.
    
- * All flex object also must have the same namespace.
+ * All flex object also must reside on the same flex namespace, the namespace name doesn't need to
+   match the .net namespace name.
  
 ===============================================================================
 
